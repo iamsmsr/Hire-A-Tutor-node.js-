@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+</head>
+<body>
+  <h2>Welcome to your Dashboard!</h2>
+  <p>This is your personalized dashboard.</p>
+
+  <h3>Submit a Tuition Request</h3>
+  <form action="/submit-request" method="POST">
+    <label for="subject">Subject:</label><br>
+    <input type="text" id="subject" name="subject" required><br><br>
+    
+    <label for="remarks">Remarks:</label><br>
+    <textarea id="remarks" name="remarks" required></textarea><br><br>
+    
+    <input type="submit" value="Submit Request">
+  </form>
+
+  <h3>Your Messages</h3>
+  <div id="messages">
+    {{messages}}
+  </div>
+
+  <p><a href="/">Logout</a></p>
+</body>
+</html>

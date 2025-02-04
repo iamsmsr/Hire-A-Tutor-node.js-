@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <script>
+    // JavaScript to handle the "Accept" button click
+    async function showAcceptDialog(requestId, subject) {
+      // Prompt the user to write a message
+      const message = prompt(`Request ID: ${requestId}\nSubject: ${subject}\n\nWrite your message below:`);
+
+      // Check if a message was entered
+      if (message && message.trim()) {
+        try {
+          // Send a POST request to the server
+          const response = await fetch('/accept-request', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              requestId: requestId,
+              subject: subject,
+              message: message
+            })
+          });
+
+          if (response.ok) {
+            alert('Request accepted and message sent!');
+          } else {
+            alert('Failed to send the message.');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred while sending the message.');
+        }
+      } else {
+        alert('No message was sent.');
+      }
+    }
+  </script>
+</head>
+<body>
+  <h2>Welcome to your Dashboard, Admin / Teacher!</h2>
+  <p>This is your personalized dashboard.</p>
+  
+  <table border="1">
+    <thead>
+        <tr>
+            <th>Request ID</th>
+            <th>Subject</th>
+            <th>Remarks</th>
+            <th>Created At</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Add more rows dynamically -->
+        {{tableRows}}
+    </tbody>
+  </table>
+  
+    <h3>Your Messages</h3>
+  <div id="messages">
+    {{messages}}
+  </div>
+
+  <p><a href="/admin">Logout</a></p>
+</body>
+</html>
